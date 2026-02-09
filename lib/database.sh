@@ -61,3 +61,57 @@ list_databases() {
     echo ""
     read -p "Press Enter to continue..."
 }
+
+drop_database() {
+    clear
+    echo "================================"
+    echo "   Drop Database"
+    echo "================================"
+    echo ""
+    read -p "Enter database name: " db_name
+    if [[ ! -d "$DB_DIR/$db_name" ]]; then
+        echo ""
+        echo "Error, Database '$db_name' does not exist!"
+        echo ""
+        read -p "Press Enter to continue..."
+        return
+    fi
+
+    echo ""
+    echo "WARNING! This will permanently delete the database and all its tables!"
+    echo ""
+    read -p "Are you sure you want to delete '$db_name'? (yes/no): " confirm
+    
+    if [[ "$confirm" == "yes" ]]; then
+        rm -rf "$DB_DIR/$db_name"
+        echo ""
+        echo "Database '$db_name' deleted!"
+        echo ""
+    else
+        echo ""
+        echo "Operation failed!"
+        echo ""
+    fi
+ read -p "Press Enter to continue..."
+}
+
+connect_database() {
+ clear
+    echo "================================"
+    echo "   Connect to Database"
+    echo "================================"
+    echo ""
+    read -p "Enter database name: " db_name
+    if [[ ! -d "$DB_DIR/$db_name" ]]; then
+        echo ""
+        echo "Error, Database '$db_name' does not exist!"
+        echo ""
+        read -p "Press Enter to continue..."
+        return
+    fi
+    
+    echo ""
+    echo "Connected to '$db_name' successfully!"
+    sleep 1
+    table_menu "$db_name"
+}
