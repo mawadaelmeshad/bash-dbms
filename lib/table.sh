@@ -39,3 +39,4 @@ select_from_table(){
     read -p "Table name: " table_name
     column -t -s '|' "$table_name.data"
 }
+
