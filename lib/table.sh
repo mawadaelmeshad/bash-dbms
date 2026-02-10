@@ -40,3 +40,66 @@ select_from_table(){
     column -t -s '|' "$table_name.data"
 }
 
+select_all(){
+    read -p "Table name: " table_name
+    column -t -s '|' "$table_name.data"
+}
+
+select_where(){
+    read -p "Table name: " table_name
+    read -p "Column name: " col_name
+    read -p "Value: " value
+
+    col_num=$(awk -F: -v col="$col_name" '
+    { if($1==col) print NR}' "$table_name.meta")
+
+    awk -F'|' -v c="$col_num" -v v="$value" '
+    $c==v {print} ' "$table_name.data" | column -t -s '|' 
+}
+
+
+update_table(){
+    read -p "Table name: " table_name
+    read -p "Condition column: " cond_col
+    read -p "Condition value: " cond_val
+    read -p "Column to update: " target_col
+    read -p "New value: " new_val
+
+    cond_num=$(awk -F: -v col="$cond_col" '
+    { if($1==col) print NR }' "$table_name.meta")
+
+    target_num=$(awk -F: -v col="$target_col" '
+    { if($1==col) print NR }' "$table_name.meta")
+
+    awk -F'|' -v OFS='|' \
+        -v c="$cond_num" -v v="$cond_val" \
+        -v t="$target_num" -v n="$new_val" '
+    {
+        if($c==v)
+            $t=n
+        print
+    }' "$table_name.data" > temp && mv temp "$table_name.data"
+}
+
+delete_from_table(){
+    read -p "Table name: " table_name
+    read -p "Column name: " col_name
+    read -p "Value: " value
+
+    col_num=$(awk -F: -v col="$col_name" '
+    { if($1==col) print NR }' "$table_name.meta")
+
+    awk -F'|' -v c="$col_num" -v v="$value" '
+    $c!=v { print }' "$table_name.data" > temp && mv temp "$table_name.data"
+}
+
+drop_table(){
+    read -p "Table name: " table_name
+    rm "$table_name.meta" "$table_name.data"
+}
+
+list_tables(){
+    ls *.meta 2>/dev/null | sed 's/.meta//'
+}
+
+
