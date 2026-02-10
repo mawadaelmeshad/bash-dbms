@@ -49,7 +49,7 @@ check_primary_key(){
         return 1
     fi
 
-    while IFS = '|' read -ra row; do
+    while IFS='|' read -ra row; do
         if [[ "${row[$pk_index]}" == "$pk_values" ]]; then
             echo "Error: Duplicate primary key value '$pk_values'!"
             return 1
