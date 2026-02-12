@@ -30,7 +30,7 @@ The system allows users to:
 ---
 
 ## 📁 Project Structure
-
+```
 bash-dbms/
 │
 ├── databases/ # Contains all databases (directories)
@@ -43,6 +43,6 @@ bash-dbms/
 │
 ├── dbms.sh # Main script (entry point)
 └── README.md
-
+```
 ## Authors
 Mawadah Hassan & Maryam Abdelraheem
