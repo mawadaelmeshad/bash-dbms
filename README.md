@@ -1,11 +1,11 @@
-# 🗄️ Bash DBMS Project
+#  Bash DBMS Project
 
 A simple **Database Management System (DBMS)** built using **Bash scripting**.  
 This project simulates basic database operations using directories and text files.
 
 ---
 
-## 📌 Project Idea
+## Project Idea
 
 The system allows users to:
 
@@ -20,7 +20,7 @@ The system allows users to:
 
 ---
 
-## 📂 How It Works
+## How It Works
 
 - **Database** → Stored as a directory inside `databases/`
 - **Table** → Stored as two files inside the database folder:
