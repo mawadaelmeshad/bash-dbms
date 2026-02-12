@@ -4,7 +4,6 @@ mkdir -p "$DB_DIR"
 source ./lib/database.sh
 source ./lib/table.sh
 source ./lib/validation.sh
-source ./lib/display.sh
 
 main_menu() {
     while true; do
